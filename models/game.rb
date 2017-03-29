@@ -24,7 +24,6 @@ class Game
   def good_guess(letter)
     used_letters << letter
     (secret_word.include?letter) ? guessed_so_far(letter) : @remaining_moves -= 1
-    game_over?
   end
 
   def win?
