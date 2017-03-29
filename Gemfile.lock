@@ -9,7 +9,7 @@ GEM
     execjs (2.7.0)
     font-awesome-sass (4.7.0)
       sass (>= 3.2)
-    libv8 (3.16.14.19-x86_64-darwin-16)
+    libv8 (3.16.14.19)
     rack (1.6.5)
     rack-coffee (1.0.3)
       coffee-script
@@ -33,7 +33,7 @@ GEM
       libv8 (~> 3.16.14.15)
       ref
     tilt (2.0.7)
-    uglifier (3.1.9)
+    uglifier (3.1.11)
       execjs (>= 0.3.0, < 3)
 
 PLATFORMS
@@ -42,6 +42,7 @@ PLATFORMS
 DEPENDENCIES
   coffee-script
   font-awesome-sass
+  libv8
   rack-coffee
   sass
   sinatra

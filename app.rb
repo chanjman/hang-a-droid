@@ -5,6 +5,7 @@ require 'uglifier'
 require 'sass'
 require 'coffee-script'
 require 'execjs'
+require 'v8'
 require_relative 'models/game'
 
 class ApplicationController < Sinatra::Base
