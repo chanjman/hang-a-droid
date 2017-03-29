@@ -1,5 +1,12 @@
+hangParts = ['.pole', '.level-beam', '.cross-beam', '.down-beam', '.head', '.lant', '.rant', '.body', '.arm', '.leg']
+
 $ ->
-  # Get the name
+  if window.location.href.match(/new/)
+    $.each hangParts, (key, value) ->
+      $(value).css(opacity: '0.2')
+
+$ ->
+# Get the name
   textInput = document.getElementById('name-form')
   timeout = null
 
@@ -13,6 +20,7 @@ $ ->
     ), 500)
 
 $ ->
+# Choose letter of alphabet
   $('.alphabet__letter span').click ->
     letter = $(this).text()
     $(this).parent().addClass('alphabet__letter--used')
@@ -21,11 +29,30 @@ $ ->
       type: 'POST'
       data: { guess: letter}
       success: (data) ->
-        hang = JSON.parse(data)
-        $('.remaining_moves span').text(hang['remaining_moves'])
+        hangData = JSON.parse(data)
+        hangMoves = hangData['remaining_moves']
+        hangGuessed = hangData['guessed_letters']
+        hangOver = hangData['game_over']
 
-        #console.log $('.letter span').eq(0).html()
+
         i = $('.letter').length - 1
-        while i > 0
-          $('.letter span').eq(i).html(hang['guessed_letters'][i])
+        while i >= 0
+          $('.letter span').eq(i).html(hangGuessed[i])
           i--
+
+        $('.remaining_moves span').text(hangMoves)
+        $('.remaining_moves span').css(color: 'rgb(149, 46, 46)') if hangMoves < 4
+
+        altMoves = 9 - hangMoves
+
+        $(hangParts[altMoves]).css(opacity: '1') if altMoves >= 0
+
+        alert 'Game over' if hangOver
+
+$ ->
+# Disable enter submit on forms
+  $(document).on 'keyup keypress', 'form input[type="text"]', (e) ->
+    if e.keyCode == 13 || e.keycode == 169
+      e.preventDefault()
+      return false
+    return
