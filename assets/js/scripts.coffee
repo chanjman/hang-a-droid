@@ -32,7 +32,9 @@ $ ->
         hangData = JSON.parse(data)
         hangMoves = hangData['remaining_moves']
         hangGuessed = hangData['guessed_letters']
-        hangOver = hangData['game_over']
+        hangWin = hangData['win']
+        hangLost = hangData['lost']
+
 
 
         i = $('.letter').length - 1
@@ -47,7 +49,7 @@ $ ->
 
         $(hangParts[altMoves]).css(opacity: '1') if altMoves >= 0
 
-        alert 'Game over' if hangOver
+        alert 'Game over' if hangWin || hangLost
 
 $ ->
 # Disable enter submit on forms
