@@ -12,6 +12,10 @@ class ApplicationController < Sinatra::Base
   # initialize new sprockets environment
   set :environment, Sprockets::Environment.new
 
+  configure do
+    enable :sessions
+  end
+
   # append assets paths
   environment.append_path 'assets/stylesheets'
   environment.append_path 'assets/js'
