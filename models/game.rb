@@ -27,10 +27,6 @@ class Game
     game_over?
   end
 
-  def game_over?
-    win? || lost?
-  end
-
   def win?
     secret_word == guessed_letters
   end
@@ -58,7 +54,8 @@ class Game
     {
       guessed_letters: guessed_letters,
       remaining_moves: remaining_moves,
-      secret_word: secret_word
+      win: win?,
+      lost: lost?
     }
   end
 end
