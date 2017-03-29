@@ -45,6 +45,10 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/new' do
+    @player = params[:name]
+    session[:name] = @player
+    @game = Game.new({ player: @player})
+
     slim :new
   end
 end
