@@ -45,10 +45,23 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/new' do
-    @player = params[:name]
-    session[:name] = @player
-    @game = Game.new({ player: @player})
+    session[:name] = params[:name]
+    @player = session[:name]
+    @game = Game.new(player: @player)
+
+    session[:game] = @game
+    session[:guessed_letters] = @game.guessed_letters
+    session[:secret_word] = @game.secret_word
+    session[:used_letters] = @game.used_letters
+    session[:remaining_moves] = @game.remaining_moves
+    session[:id] = @game.id
 
     slim :new
+  end
+
+  post '/guess' do
+    letter = params[:guess]
+    session[:game].good_guess(letter)
+    session[:game].json_response.to_json
   end
 end
