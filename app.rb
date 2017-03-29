@@ -45,7 +45,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/new' do
-    session[:name] = params[:name]
+    session[:name] = params[:name] unless params[:name].nil?
     @player = session[:name]
     @game = Game.new(player: @player)
 
