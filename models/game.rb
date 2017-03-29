@@ -1,10 +1,15 @@
+require_relative 'dictionary.rb'
+require_relative 'dict_graph.rb'
+require_relative 'players.rb'
+require_relative 'saveload.rb'
+
 # Big brother for the game
 class Game
   attr_reader :secret_word, :player, :id, :used_letters, :guessed_letters, :remaining_moves
 
   def initialize(args)
     @secret_word = args[:secret_word] || Dictionary.new.word
-    @guessed_letters = args[:guessed_letters] || Array.new(secret_word.size) { '-' }
+    @guessed_letters = args[:guessed_letters] || Array.new(secret_word.size) { '_' }
     @used_letters = args[:used_letters] || []
     @remaining_moves = args[:remaining_moves] || 10
     @player = args[:player] || Player.new
