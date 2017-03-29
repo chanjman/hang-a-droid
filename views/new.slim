@@ -1,4 +1,16 @@
-main
+main.hang__container
   section.hang-area--new
     == slim :hanging_droid
-    .secret-word
+    .secret-word__container
+      .secret-word
+        - @game.guessed_letters.each do |letter|
+          .letter
+            span= letter
+      h4.remaining_moves Remaining moves: <span> #{@game.remaining_moves} </span>
+  section.choice
+    h2.choice__cta #{@player}, please choose a letter
+    .alphabet
+      - ('a'..'z').each do |letter|
+        .alphabet__letter
+          span= letter
+    
