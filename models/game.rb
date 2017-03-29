@@ -9,7 +9,7 @@ class Game
 
   def initialize(args)
     @secret_word = args[:secret_word] || Dictionary.new.word
-    @guessed_letters = args[:guessed_letters] || Array.new(secret_word.size) { '_' }
+    @guessed_letters = args[:guessed_letters] || Array.new(secret_word.size) { '' }
     @used_letters = args[:used_letters] || []
     @remaining_moves = args[:remaining_moves] || 10
     @player = args[:player] || Player.new
@@ -51,6 +51,14 @@ class Game
       guessed_letters: guessed_letters,
       used_letters: used_letters,
       remaining_moves: remaining_moves
+    }
+  end
+
+  def json_response
+    {
+      guessed_letters: guessed_letters,
+      remaining_moves: remaining_moves,
+      secret_word: secret_word
     }
   end
 end
