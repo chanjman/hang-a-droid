@@ -6,7 +6,7 @@ class Dictionary
     @word = select_random_secret_word
   end
 
-  DICTIONARY = '../dictionary.txt'.freeze
+  DICTIONARY = (Dir.pwd + '/models/dictionary.txt').freeze
   WORDLENGTH = [5, 12].freeze
 
   def dictionary
