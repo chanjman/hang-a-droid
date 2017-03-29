@@ -39,4 +39,8 @@ class ApplicationController < Sinatra::Base
   get '/load-game' do
     slim :load_game
   end
+
+  get '/new' do
+    slim :new
+  end
 end
