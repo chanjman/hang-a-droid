@@ -96,6 +96,71 @@ header, main
 #play
   display: none
 
+/*------- Hang new ------------
+.hang__container
+  display: flex
+  flex-direction: column
+
 .hang-area--new
   display: flex
-  justify-content: space-around
+  justify-content: center
+  flex-wrap: wrap
+
+/*------- Secret word ---------
+
+.secret-word
+  margin-left: 10em
+  display: flex
+  justify-content: center
+  align-items: center
+
+.letter
+  width: 1.3em
+  height: 2.3em
+  padding: 0.5em
+  margin: 0.7em
+  border: 2px $complementary solid
+
+  span
+    font-size: 2em
+    font-family: Coustard, serif
+    color: rgb(92, 181, 74)
+    text-align: center
+
+/*------- Choice ----------
+.choice
+  width: 100%
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+
+.choice__cta
+  text-align: center
+  color: rgb(150, 95, 160)
+
+.alphabet
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
+  width: 50%
+
+.alphabet__letter
+  display: flex
+  justify-content: center
+  width: 1rem
+  height: 2rem
+  padding: 0.5rem
+  margin: 0.5rem
+  background-color: rgb(199, 229, 192)
+  border-radius: 2em
+
+  &:hover
+    cursor: pointer
+    background-color: rgb(92, 181, 74)
+
+  span
+    font-size: 1.5em
+    font-family: Coustard, serif
+    color: rgb(51, 32, 54)
+    text-align: center
