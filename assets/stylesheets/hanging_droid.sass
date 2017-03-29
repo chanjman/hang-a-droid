@@ -1,0 +1,128 @@
+/*-------- Android ---------
+
+.android
+  font-size: 12px
+  position: relative
+  top: 5em
+  div
+    background: $complementary
+
+/*--------- Head ------------
+
+.head
+  height: 4.5em
+  width: 10em
+  border-radius: 9em 9em 0 0
+
+/*--------- Eyes ---------
+
+.head
+  &:after, &:before
+    content: ''
+    position: absolute
+    width: 0.8em
+    height: 0.8em
+    border-radius: 50%
+    background: white
+    top: 2em
+  &:after
+    left: 2.4em
+  &:before
+    right: 2.4em
+
+/*------- Antennas ------------
+
+.lant, .rant
+  height: 3em
+  width: 0.35em
+  border-radius: 0.2em
+  position: absolute
+  top: -1.5em
+
+.lant
+  left: 2.55em
+  transform: rotate(-30deg)
+
+.rant
+  right: 2.55em
+  transform: rotate(30deg)
+
+/*-------- Body -----------
+
+.body
+  position: relative
+  width: 10em
+  height: 8.25em
+  border-radius: 0 0 1em 1em
+  margin-top: 0.5em
+
+.arm, .leg
+  position: absolute
+  width: 2.1em
+  height: 6em
+  border-radius: 1em
+
+/*-------Arms ------------
+
+.arm
+  &:nth-of-type(1)
+    left: -2.6em
+  &:nth-of-type(2)
+    right: -2.6em
+
+/*------- Legs -----------
+
+.leg
+  bottom: -3.25em
+  &:nth-of-type(3)
+    right: 2.1em
+  &:nth-of-type(4)
+    left: 2.1em
+
+/*--------- Gallows ------------
+
+.gallows
+  font-size: 100%
+  position: relative
+  left: -1em
+
+  div
+    background: $primary
+    border-radius: 1em
+
+/*---------- Base ------------
+.base
+  position: relative
+  width: 8em
+  height: 1em
+
+/*----------- Pole ------------
+.pole
+  position: relative
+  width: 1em
+  height: 18em
+  top: 0.3em
+  left: 3.5em
+
+/*--------- Top ----------------
+.level-beam
+  position: absolute
+  height: 1em
+  width: 9.7em
+  left: 3.5em
+
+.cross-beam
+  position: absolute
+  transform: rotate(-45deg)
+  width: 6em
+  height: 1em
+  top: 2em
+  left: 3em
+
+.down-beam
+  position: absolute
+  height: 1em
+  width: 4em
+  transform: rotate(90deg)
+  top: 1.9em
+  left: 10.7em
