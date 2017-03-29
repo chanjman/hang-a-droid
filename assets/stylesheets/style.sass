@@ -108,6 +108,12 @@ header, main
 
 /*------- Secret word ---------
 
+.secret-word__container
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+
 .secret-word
   margin-left: 10em
   display: flex
@@ -115,7 +121,9 @@ header, main
   align-items: center
 
 .letter
-  width: 1.3em
+  display: flex
+  justify-content: center
+  width: 1.5em
   height: 2.3em
   padding: 0.5em
   margin: 0.7em
@@ -164,3 +172,11 @@ header, main
     font-family: Coustard, serif
     color: rgb(51, 32, 54)
     text-align: center
+
+.alphabet__letter--used
+  background-color: rgb(219, 201, 223)
+  pointer-events: none
+
+  &:hover
+    cursor: auto
+    background-color: rgb(219, 201, 223)
