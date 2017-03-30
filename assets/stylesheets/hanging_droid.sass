@@ -128,4 +128,20 @@
   transform: rotate(90deg)
   top: 1.9em
   left: 10.7em
-  
+
+/*------ Hang him ----------
+
+@-webkit-keyframes hangHim
+  0%
+    transform: translateY(0)
+
+  100%
+    transform: translateY(2em)
+
+
+.hanger
+  animation:
+    name: hangHim
+    duration: 1s
+    fill-mode: forwards
+  transition: transform 1s linear
