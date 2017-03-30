@@ -1,4 +1,5 @@
 hangParts = ['.pole', '.level-beam', '.cross-beam', '.down-beam', '.head', '.lant', '.rant', '.body', '.arm', '.leg']
+movesCheck = 10
 
 $ ->
   if window.location.href.match(/new/)
@@ -35,8 +36,6 @@ $ ->
         hangWin = hangData['win']
         hangLost = hangData['lost']
 
-
-
         i = $('.letter').length - 1
         while i >= 0
           $('.letter span').eq(i).html(hangGuessed[i])
@@ -45,9 +44,12 @@ $ ->
         $('.remaining_moves span').text(hangMoves)
         $('.remaining_moves span').css(color: 'rgb(149, 46, 46)') if hangMoves < 4
 
-        altMoves = 9 - hangMoves
-
-        $(hangParts[altMoves]).css(opacity: '1') if altMoves >= 0
+        if movesCheck > hangMoves
+          altMoves = 9 - hangMoves
+          if altMoves >= 0
+            $(hangParts[altMoves]).css(opacity: '1').addClass('glower')
+            $('.remaining_moves span').effect('highlight', color: '#8e44ad')
+          movesCheck--
 
         alert 'Game over' if hangWin || hangLost
 
