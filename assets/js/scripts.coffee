@@ -51,15 +51,32 @@ $ ->
           $('.letter span').eq(i).html(hangGuessed[i])
           i--
 
+        if movesCheck == hangMoves
+          $('.letter span:not(:empty)').parent().effect('highlight', color: '#2ecc71')
+
         checkMoves(hangMoves)
 
         winMsg = 'You guessed it!!'
         lostMsg = 'You didn\'t guess it'
 
-        openModal(winMsg) if hangWin
-        openModal(lostMsg) if hangLost
+        # What to do with win
+        if hangWin
+          $('.letter').addClass('glow')
+          setTimeout (->
+            openModal(winMsg)
+            return
+          ), 2000
 
-        if hangLost || hangLost
+        # What to do with lost
+        if hangLost
+          $('.body').addClass('hanger')
+          setTimeout (->
+            openModal(lostMsg)
+            return
+          ), 2000
+
+        # What to do with win or lost
+        if hangWin || hangLost
           $('.alphabet__letter').addClass('alphabet__letter--used')
           i = $('.letter').length - 1
           while i >= 0
