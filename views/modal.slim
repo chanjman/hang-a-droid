@@ -1,0 +1,12 @@
+.modal#game-over-modal
+  .modal-content
+    .modal-header
+      span.modal-close &times;
+      h2
+    .modal-body
+      p.modal__secret Secret word was <span>'#{@game.secret_word.join}'</span>
+      hr
+      form action='/new' type='GET'
+        input.btn.btn--complementary#new type='submit' value='New game'
+      form actio='/load-game' type='GET'
+        input.btn.btn--primary#load type='submit' value='Load Game'

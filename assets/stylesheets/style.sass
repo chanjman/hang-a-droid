@@ -8,6 +8,12 @@ $complementary: #8e44ad
 a
   text-decoration: none
 
+hr
+  height: 1px
+  width: 100%
+  border: 0
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0))
+
 /*------- Header ----------
 .title
   color: $complementary
@@ -192,22 +198,90 @@ header, main
 
 @-webkit-keyframes glow
   0%
-    border: 0 solid transparent
+    border: none
   50%
     border-color: $complementary
-    -webkit-box-shadow: 0 0 5px 5px $complementary
-    -moz-box-shadow: 0 0 5px 5px $complementary
     box-shadow: 0 0 5px 5px $complementary
   100%
-    border: 0 solid transparent
+    border: none
 
 
 .glower
-  border: 0 solid transparent
+  border: none
   animation:
     name: glow
     duration: 0.5s
     iteration-count: 1
-  -webkit-transition: border 0.5s linear, box-shadow 0.5s linear
-  -moz-transition: border 0.5s linear, box-shadow 0.5s linear
   transition: border 0.5s linear, box-shadow 0.5s linear
+
+/*--------- Modal ----------
+.modal
+  display: none
+  position: fixed
+  z-index: 1
+  left: 0
+  top: 0
+  width: 100%
+  height: 100%
+  overflow: auto
+  background-color: rgb(0, 0, 0)
+  background-color: rgba(0, 0, 0, 0.6)
+
+/* Modal Header
+
+.modal-header
+  text-align: center
+  padding: 2px 16px
+  background-color: #5cb85c
+  border-radius: 1em 1em 0 0
+  color: white
+
+/* Modal Body
+
+.modal-body
+  padding: 2px 16px
+  display: flex
+  flex-direction: column
+  align-items: center
+
+/* Modal Content
+
+.modal-content
+  position: relative
+  top: 14em
+  background-color: #fefefe
+  margin: auto
+  padding: 0
+  border: 1px solid #888
+  border-radius: 1em
+  width: 40%
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+  animation-name: animatetop
+  animation-duration: 0.4s
+
+.modal__secret
+  font-size: 1.5em
+  span
+    color: $complementary
+
+/* The Close Button
+
+.modal-close
+  color: white
+  float: right
+  font-size: 28px
+  font-weight: bold
+  &:hover, &:focus
+    color: black
+    text-decoration: none
+    cursor: pointer
+
+/* Add Animation
+@keyframes animatetop
+  from
+    top: -20em
+    opacity: 0
+
+  to
+    top: 14em
+    opacity: 1
