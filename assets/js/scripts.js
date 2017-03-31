@@ -50,20 +50,9 @@ function parseGuessData(data) {
 function placeLetter(guessed, moves) {
   var currLetter = [];
 
-  if (guessedLetters.length === 0) {
-    guessed.forEach(function (ltr, idx) {
-      if (ltr !== '') {
-        $('.letter span').eq(idx).html(ltr).parent().effect('highlight', {
-          color: '#2ecc71',
-        });;
-        guessedLetters.push(ltr);
-      }
-    });
-  } else {
-    currLetter = guessed.filter(function (ltr) {
-      return (guessedLetters.indexOf(ltr) === -1 && ltr !== '');
-    });
-  }
+  currLetter = guessed.filter(function (ltr) {
+    return (guessedLetters.indexOf(ltr) === -1 && ltr !== '');
+  });
 
   guessed.forEach(function (ltr, idx) {
     if (currLetter.indexOf(ltr) !== -1) {
