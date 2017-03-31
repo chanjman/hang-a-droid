@@ -3,17 +3,24 @@ hangParts = ['.pole', '.level-beam', '.cross-beam', '.down-beam',
 
 movesCheck = 10;
 
+guessedLetters = [];
+
 modal = document.getElementById('game-over-modal');
 
 $(document).ready(function () {
   changeDroidOpacity();
   guessTheLetter();
-  closeModal();
-  hideShowSubmitButton();
   disableEnterOnForms();
+  if (window.location.href.match(/new-game\?/)) {
+    hideShowSubmitButton();
+  }
+
+  if (window.location.href.match(/new\?/)) {
+    closeModal();
+  }
 });
 
-changeDroidOpacity = function () {
+function changeDroidOpacity() {
   if (window.location.href.match(/new/)) {
     $.each(hangParts, function (key, value) {
       return $(value).css({
@@ -23,22 +30,7 @@ changeDroidOpacity = function () {
   }
 };
 
-hideShowSubmitButton = function () {
-  var textInput = document.getElementById('name-form');
-  var timeout = null;
-  textInput.onkeyup = function (e) {
-    clearTimeout(timeout);
-    return timeout = setTimeout((function () {
-      if ($.trim($('#name-form').val())) {
-        return $('#play').fadeIn(200);
-      } else {
-        return $('#play').fadeOut(200);
-      }
-    }), 500);
-  };
-};
-
-parseGuessData = function (data) {
+function parseGuessData(data) {
   var guessed, hangData, lost, moves, secret, win;
   hangData = JSON.parse(data);
   moves = hangData.remaining_moves;
@@ -55,22 +47,35 @@ parseGuessData = function (data) {
   };
 };
 
-placeLetter = function (guessed, moves) {
-  var i;
-  i = $('.letter').length - 1;
-  while (i >= 0) {
-    $('.letter span').eq(i).html(guessed[i]);
-    i--;
-  }
+function placeLetter(guessed, moves) {
+  var currLetter = [];
 
-  if (movesCheck === moves) {
-    $('.letter span:not(:empty)').parent().effect('highlight', {
-      color: '#2ecc71',
+  if (guessedLetters.length === 0) {
+    guessed.forEach(function (ltr, idx) {
+      if (ltr !== '') {
+        $('.letter span').eq(idx).html(ltr).parent().effect('highlight', {
+          color: '#2ecc71',
+        });;
+        guessedLetters.push(ltr);
+      }
+    });
+  } else {
+    currLetter = guessed.filter(function (ltr) {
+      return (guessedLetters.indexOf(ltr) === -1 && ltr !== '');
     });
   }
+
+  guessed.forEach(function (ltr, idx) {
+    if (currLetter.indexOf(ltr) !== -1) {
+      $('.letter span').eq(idx).html(ltr).parent().effect('highlight', {
+        color: '#2ecc71',
+      });
+      guessedLetters.push(ltr);
+    }
+  });
 };
 
-hangTheDroid = function (remainingMoves) {
+function hangTheDroid(remainingMoves) {
   var altMoves;
   altMoves = 9 - remainingMoves;
   if (altMoves >= 0) {
@@ -85,10 +90,10 @@ hangTheDroid = function (remainingMoves) {
   movesCheck--;
 };
 
-checkMoves = function (remainingMoves) {
-  $('.remainingMoves span').text(remainingMoves);
+function checkMoves(remainingMoves) {
+  $('.remaining_moves span').text(remainingMoves);
   if (remainingMoves < 4) {
-    $('.remainingMoves span').css({
+    $('.remaining_moves span').css({
       color: 'rgb(149, 46, 46)',
     });
   }
@@ -98,12 +103,12 @@ checkMoves = function (remainingMoves) {
   }
 };
 
-openModal = function (msg) {
+function openModal(msg) {
   modal.style.display = 'block';
   $('.modal-header h2').text(msg);
 };
 
-gameOverRoutine = function (state, secret) {
+function gameOverRoutine(state, secret) {
   var i, lostMsg, results, winMsg;
   winMsg = 'You guessed it!!';
   lostMsg = 'You didn\'t guess it';
@@ -134,7 +139,7 @@ gameOverRoutine = function (state, secret) {
   }
 };
 
-guessTheLetter = function () {
+function guessTheLetter() {
   return $('.alphabet__letter span').click(function () {
     var letter;
     letter = $(this).text();
@@ -164,7 +169,7 @@ guessTheLetter = function () {
   });
 };
 
-disableEnterOnForms = function () {
+function disableEnterOnForms() {
   return $(document).on('keyup keypress', 'form input[type="text"]', function (e) {
     if (e.keyCode === 13 || e.keycode === 169) {
       e.preventDefault();
@@ -173,17 +178,31 @@ disableEnterOnForms = function () {
   });
 };
 
-closeModal = function () {
+function hideShowSubmitButton() {
+  var textInput = document.getElementById('name-form');
+  var timeout = null;
+  textInput.onkeyup = function (e) {
+    clearTimeout(timeout);
+    return timeout = setTimeout((function () {
+      if ($.trim($('#name-form').val())) {
+        return $('#play').fadeIn(200);
+      } else {
+        return $('#play').fadeOut(200);
+      }
+    }), 500);
+  };
+};
 
+function closeModal() {
   var span;
   span = $('.modal-close')[0];
-  span.on(click, function () {
+  span.onclick = function () {
     modal.style.display = 'none';
-  });
+  };
 
-  window.on(click, function (event) {
+  window.onclick = function (event) {
     if (event.target === modal) {
       modal.style.display = 'none';
     }
-  });
+  };
 };
