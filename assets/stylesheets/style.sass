@@ -133,21 +133,41 @@ header, main
   display: flex
   justify-content: center
   align-items: center
+  perspective: 500px
 
 .letter
   display: flex
   justify-content: center
+  position: relative
   width: 1.5em
   height: 2.3em
   padding: 0.5em
   margin: 0.7em
-  border: 2px $complementary solid
 
   span
     font-size: 2em
     font-family: Coustard, serif
     color: rgb(92, 181, 74)
     text-align: center
+
+.letter span.neon_glow
+  animation: neon 1.5s ease-in-out infinite alternate
+
+.letter--overlay.hidden
+  transform: rotateX(90deg)
+  opacity: 0
+
+.letter--overlay
+  width: 100%
+  height: 100%
+  position: absolute
+  background-color: white
+  top: 0
+  left: 0
+  border: 2px $complementary solid
+  z-index: 99
+  transform-origin: center top
+  transition: transform 0.8s ease, opacity 1.4s ease
 
 .remaining_moves
   margin-left: 10em
@@ -205,22 +225,18 @@ header, main
 /*---------- Glow ------------
 
 @-webkit-keyframes glow
-  0%
-    border: none
-  50%
-    border-color: $complementary
-    box-shadow: 0 0 5px 5px $complementary
-  100%
-    border: none
+  from
+    transform: rotateZ(0)
+  to
+    transform: rotateZ(360deg)
 
 
 .glower
-  border: none
   animation:
     name: glow
-    duration: 0.5s
+    duration: 0.8s
     iteration-count: 1
-  transition: border 0.5s linear, box-shadow 0.5s linear
+  transition: transform 0.8s ease
 
 .glow
   border-color: $primary
@@ -297,3 +313,12 @@ header, main
   to
     top: 14em
     opacity: 1
+
+/*-------- Text glow ---------
+
+@keyframes neon
+  from
+    transform: rotateY(0)
+
+  to
+    transform: rotateY(360deg)

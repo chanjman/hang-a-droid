@@ -6,6 +6,7 @@ main.hang__container
         - @game.guessed_letters.each do |letter|
           .letter
             span= letter
+            .letter--overlay
       h4.remaining_moves Remaining moves: <span> #{@game.remaining_moves} </span>
   section.choice
     h2.choice__cta #{@player}, please choose a letter

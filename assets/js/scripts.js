@@ -56,9 +56,11 @@ function placeLetter(guessed, moves) {
 
   guessed.forEach(function (ltr, idx) {
     if (currLetter.indexOf(ltr) !== -1) {
-      $('.letter span').eq(idx).html(ltr).parent().effect('highlight', {
-        color: '#2ecc71',
-      });
+      $('.letter span').eq(idx).html(ltr);
+      setTimeout((function () {
+        $('.letter--overlay').eq(idx).addClass('hidden');
+      }
+      ), 500);
       guessedLetters.push(ltr);
     }
   });
@@ -101,11 +103,14 @@ function gameOverRoutine(state, secret) {
   var i, lostMsg, results, winMsg;
   winMsg = 'You guessed it!!';
   lostMsg = 'You didn\'t guess it';
+
   if (state.win) {
-    $('.letter').addClass('glow');
+    setTimeout((function () {
+      $('.letter span').addClass('neon_glow');
+    }), 800);
     setTimeout((function () {
       openModal(winMsg);
-    }), 2000);
+    }), 3000);
   }
 
   if (state.lost) {
@@ -121,6 +126,7 @@ function gameOverRoutine(state, secret) {
     results = [];
     while (i >= 0) {
       $('.letter span').eq(i).html(secret[i]);
+      $('.letter--overlay').eq(i).addClass('hidden');
       results.push(i--);
     }
 
