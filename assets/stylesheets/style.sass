@@ -1,22 +1,35 @@
+/*------- Fonts ------
+@import url(http://fonts.googleapis.com/css?family=Coustard|Roboto:400,500,300,700)
+
+
 // Colors
-$primary: #2ecc71
+$primary: rgb(46,204,113)
 $complementary: #8e44ad
 
 *:focus
   outline: none
 
+body
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+  text-rendering: optimizeLegibility
+  font-family: 'Roboto', sans-serif
+  background-color: #fafafa
+
 a
   text-decoration: none
+  color: inherit
 
 hr
   height: 1px
   width: 100%
   border: 0
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0))
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0))
 
-h1
+h1, h2
   margin: 0
   padding: 0.67em 0
+
 /*------- Header ----------
 .title
   color: $complementary
@@ -82,7 +95,7 @@ section
   animation-name: animateIn
   animation-iteration-count: 1
   animation-timing-function: ease-in-out
-  animation-duration: 1.5s
+  animation-duration: 1s
   animation-fill-mode: both
 
 header, main
@@ -204,15 +217,15 @@ header, main
   background-color: rgb(199, 229, 192)
   border-radius: 2em
 
-  &:hover
-    cursor: pointer
-    background-color: rgb(92, 181, 74)
+.alphabet__letter span
+  font-size: 1.5em
+  font-family: Coustard, serif
+  color: rgb(51, 32, 54)
+  text-align: center
 
-  span
-    font-size: 1.5em
-    font-family: Coustard, serif
-    color: rgb(51, 32, 54)
-    text-align: center
+.alphabet__letter:hover
+  cursor: pointer
+  background-color: rgb(92, 181, 74)
 
 .alphabet__letter--used
   background-color: rgb(219, 201, 223)
@@ -224,16 +237,16 @@ header, main
 
 /*---------- Glow ------------
 
-@-webkit-keyframes glow
+@-webkit-keyframes spin
   from
     transform: rotateZ(0)
   to
     transform: rotateZ(360deg)
 
 
-.glower
+.spinner
   animation:
-    name: glow
+    name: spin
     duration: 0.8s
     iteration-count: 1
   transition: transform 0.8s ease
@@ -322,3 +335,41 @@ header, main
 
   to
     transform: rotateY(360deg)
+
+/*--------- Load game -----------
+
+.load-container
+  display: flex
+  flex-direction: column
+  align-items: center
+
+.load-list__container
+  margin: 0
+  padding: 40px
+  display: flex
+  justify-content: center
+  flex-wrap: wrap
+
+.load-list__wrapper
+  background-color: white
+  max-width: 100%
+  padding: 1.5em
+  margin: 1em
+  border: 1px lightgrey solid
+  box-shadow: 0 1px 3px 2px rgba(0, 0, 0, .2)
+  transition: all 0.3s ease
+
+  &:hover
+    cursor: pointer
+    background-color: rgba(46,204,113, 0.2)
+    transform: scale(1.048, 1.048)
+
+.load-list__cell
+  text-align: center
+
+.load-list__cell__header
+  color: $complementary
+  margin: 0 0 1em
+
+.load-list__cell__content
+  margin: 0

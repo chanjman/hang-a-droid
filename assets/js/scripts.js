@@ -5,12 +5,11 @@ movesCheck = 10;
 
 guessedLetters = [];
 
-modal = document.getElementById('game-over-modal');
-
 $(document).ready(function () {
   changeDroidOpacity();
   guessTheLetter();
   disableEnterOnForms();
+  loadGame();
   if (window.location.href.match(/new-game\?/)) {
     hideShowSubmitButton();
   }
@@ -60,7 +59,7 @@ function placeLetter(guessed, moves) {
       setTimeout((function () {
         $('.letter--overlay').eq(idx).addClass('hidden');
       }
-      ), 500);
+    ), 300);
       guessedLetters.push(ltr);
     }
   });
@@ -72,8 +71,8 @@ function hangTheDroid(remainingMoves) {
   if (altMoves >= 0) {
     $(hangParts[altMoves]).css({
       opacity: '1',
-    }).addClass('glower');
-    $('.remainingMoves span').effect('highlight', {
+    }).addClass('spinner');
+    $('.remaining_moves span').effect('highlight', {
       color: '#8e44ad',
     });
   }
@@ -95,6 +94,8 @@ function checkMoves(remainingMoves) {
 };
 
 function openModal(msg) {
+  modal = document.getElementById('game-over-modal');
+
   modal.style.display = 'block';
   $('.modal-header h2').text(msg);
 };
@@ -189,7 +190,8 @@ function hideShowSubmitButton() {
 };
 
 function closeModal() {
-  var span;
+  var span, modal;
+  modal = document.getElementById('game-over-modal');
   span = $('.modal-close')[0];
   span.onclick = function () {
     modal.style.display = 'none';
@@ -200,4 +202,10 @@ function closeModal() {
       modal.style.display = 'none';
     }
   };
+};
+
+function loadGame() {
+  $('.load-list__wrapper').click(function () {
+    data = this.dataset.id;
+  });
 };
