@@ -13,7 +13,9 @@ class ApplicationController < Sinatra::Base
   set :environment, Sprockets::Environment.new
 
   configure do
-    enable :sessions
+    use Rack::Session::Cookie, key: 'rack.session',
+                               path: '/',
+                               expire_after: 2_592_000
   end
 
   # append assets paths
@@ -59,6 +61,7 @@ class ApplicationController < Sinatra::Base
 
   post '/guess' do
     letter = params[:guess]
+    return session[:game].json_response.to_json if letter.empty?
     session[:game].good_guess(letter)
     session[:game].json_response.to_json
   end
