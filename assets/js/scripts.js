@@ -1,20 +1,19 @@
 hangParts = ['.pole', '.level-beam', '.cross-beam', '.down-beam',
              '.head', '.lant', '.rant', '.body', '.arm', '.leg'];
 
-movesCheck = 10;
-
+var movesCheck = null;
 guessedLetters = [];
 
 $(document).ready(function () {
   changeDroidOpacity();
+  clickLetter();
   guessTheLetter();
   disableEnterOnForms();
-  loadGame();
   if (window.location.href.match(/new-game\?/)) {
     hideShowSubmitButton();
   }
 
-  if (window.location.href.match(/new\?/)) {
+  if (window.location.href.match(/new\?|new/)) {
     closeModal();
   }
 });
@@ -30,23 +29,26 @@ function changeDroidOpacity() {
 };
 
 function parseGuessData(data) {
-  var guessed, hangData, lost, moves, secret, win;
+  var guessed, hangData, lost, moves, secret, win, used;
   hangData = JSON.parse(data);
   moves = hangData.remaining_moves;
   guessed = hangData.guessed_letters;
   win = hangData.win;
   lost = hangData.lost;
   secret = hangData.secret_word;
+  used = hangData.used_letters;
+
   return {
     moves: moves,
     guessed: guessed,
     win: win,
     lost: lost,
     secret: secret,
+    used: used,
   };
 };
 
-function placeLetter(guessed, moves) {
+function placeLetter(guessed) {
   var currLetter = [];
 
   currLetter = guessed.filter(function (ltr) {
@@ -66,19 +68,24 @@ function placeLetter(guessed, moves) {
 };
 
 function hangTheDroid(remainingMoves) {
-  var altMoves;
-  altMoves = 9 - remainingMoves;
-  if (altMoves >= 0) {
-    $(hangParts[altMoves]).css({
+  var altMoves = [];
+  var limit = 9 - remainingMoves;
+  movesCheck--;
+
+  for (var i = 0; i <= limit; i++) {
+    altMoves.push(i);
+  };
+
+  altMoves.forEach(function (idx) {
+    $(hangParts[idx]).css({
       opacity: '1',
     }).addClass('spinner');
-    $('.remaining_moves span').effect('highlight', {
-      color: '#8e44ad',
-    });
-  }
+  });
 
-  movesCheck--;
-};
+  $('.remaining_moves span').effect('highlight', {
+    color: '#8e44ad',
+  });
+}
 
 function checkMoves(remainingMoves) {
   $('.remaining_moves span').text(remainingMoves);
@@ -88,7 +95,7 @@ function checkMoves(remainingMoves) {
     });
   }
 
-  if (movesCheck > remainingMoves) {
+  if (movesCheck >= remainingMoves) {
     return hangTheDroid(remainingMoves);
   }
 };
@@ -135,33 +142,34 @@ function gameOverRoutine(state, secret) {
   }
 };
 
-function guessTheLetter() {
-  return $('.alphabet__letter span').click(function () {
-    var letter;
-    letter = $(this).text();
-    $(this).parent().addClass('alphabet__letter--used');
-    return $.ajax('/guess', {
-      type: 'POST',
-      data: {
-        guess: letter,
-      },
-      success: function (data) {
-        var hangData;
-        hangData = parseGuessData(data);
-        placeLetter(hangData.guessed, hangData.moves);
-        checkMoves(hangData.moves);
-        if (hangData.win) {
-          return gameOverRoutine({
-            win: true,
-          }, hangData.secret);
-        } else if (hangData.lost) {
-          return gameOverRoutine({
-            lost: true,
-          }, hangData.secret);
-        }
-      },
+function guessTheLetter(letter) {
+  if (typeof letter === 'undefined') { letter = ''; }
 
-    });
+  return $.ajax('/guess', {
+    type: 'POST',
+    data: {
+      guess: letter,
+    },
+    success: function (data) {
+      var hangData;
+      hangData = parseGuessData(data);
+      if (movesCheck == null) { movesCheck = hangData.moves; };
+
+      placeLetter(hangData.guessed);
+      checkMoves(hangData.moves);
+      colorUsedLetters(hangData.used);
+
+      if (hangData.win) {
+        return gameOverRoutine({
+          win: true,
+        }, hangData.secret);
+      } else if (hangData.lost) {
+        return gameOverRoutine({
+          lost: true,
+        }, hangData.secret);
+      }
+    },
+
   });
 };
 
@@ -204,8 +212,18 @@ function closeModal() {
   };
 };
 
-function loadGame() {
-  $('.load-list__wrapper').click(function () {
-    data = this.dataset.id;
+function clickLetter() {
+  return $('.alphabet__letter span').click(function () {
+    letter = $(this).text();
+    colorUsedLetters([letter]);
+    guessTheLetter(letter);
+  });
+};
+
+function colorUsedLetters(letters) {
+  var alphabet = $('.alphabet__letter span').text().split('');
+
+  letters.forEach(function (letter) {
+    $('.alphabet__letter span').eq(alphabet.indexOf(letter)).parent().addClass('alphabet__letter--used');
   });
 };
