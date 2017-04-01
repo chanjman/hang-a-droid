@@ -15,7 +15,8 @@ class ApplicationController < Sinatra::Base
   configure do
     use Rack::Session::Cookie, key: 'rack.session',
                                path: '/',
-                               expire_after: 2_592_000
+                               expire_after: 2_592_000,
+                               secret: '4ary9j6kT&vJ8%6PVUSmdk7RVqQn@z4$A5ZA2bHab2Na#8*T8E$q6'
   end
 
   # append assets paths
