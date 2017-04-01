@@ -7,7 +7,6 @@ guessedLetters = [];
 $(document).ready(function () {
   changeDroidOpacity();
   clickLetter();
-  guessTheLetter();
   disableEnterOnForms();
   if (window.location.href.match(/new-game\?/)) {
     hideShowSubmitButton();
@@ -15,6 +14,7 @@ $(document).ready(function () {
 
   if (window.location.href.match(/new\?|new/)) {
     closeModal();
+    guessTheLetter();
   }
 });
 
