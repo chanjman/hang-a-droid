@@ -43,19 +43,31 @@ class ApplicationController < Sinatra::Base
     slim :new_game
   end
 
-  get '/load-game' do
+  get '/load' do
     @saved= SaveLoad.new.saved_games
     slim :load_game
   end
 
-  get '/new/?:id?' do
-    session[:name] = params[:name] unless params[:name].nil?
-    load_game_data = SaveLoad.new.savegame_by_id(params[:id]) || { player: session[:name] }
-
+  get '/load/:id' do
+    load_game_data = SaveLoad.new.savegame_by_id(params[:id])
     @game = Game.new(load_game_data)
     @player = @game.player
-
     session[:game] = @game
+
+    slim :new
+  end
+
+  get '/save' do
+    SaveLoad.new.save_game(session[:game].to_save)
+  end
+
+  get '/new' do
+    session[:name] = params[:name] unless params[:name].nil?
+    @player = session[:name]
+    @game = Game.new(player: @player)
+    session[:game] = @game
+    @savebtn = true
+    puts @savebtn
 
     slim :new
   end
