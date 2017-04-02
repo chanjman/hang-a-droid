@@ -16,6 +16,9 @@ $(document).ready(function () {
     guessTheLetter();
     changeDroidOpacity();
   }
+
+  openMenu();
+  saveGame();
 });
 
 function changeDroidOpacity() {
@@ -204,6 +207,26 @@ function hideShowSubmitButton() {
   };
 };
 
+function openMenu() {
+  var menuButton = document.getElementById('menu-btn');
+  var menuModal = document.getElementById('menu-modal');
+  var menuClose = document.getElementById('menu-close');
+
+  menuButton.onclick = function () {
+    menuModal.style.display = 'block';
+  };
+
+  menuClose.onclick = function () {
+    menuModal.style.display = 'none';
+  };
+
+  $(window).click(function (event) {
+    if (event.target === menuModal) {
+      menuModal.style.display = 'none';
+    }
+  });
+}
+
 function closeModal() {
   var span, modal;
   modal = document.getElementById('game-over-modal');
@@ -213,11 +236,11 @@ function closeModal() {
     modal.style.display = 'none';
   };
 
-  window.onclick = function (event) {
+  $(window).click(function (event) {
     if (event.target === modal) {
       modal.style.display = 'none';
     }
-  };
+  });
 };
 
 function clickLetter() {
@@ -241,3 +264,25 @@ function colorUsedLetters(letters) {
     justColor(letters[i], alphabet);
   };
 };
+
+function saveGame() {
+  $('#save').click(function (e) {
+    e.preventDefault();
+
+    $.ajax('/save', {
+      type: 'GET',
+      success: function () {
+        var div = document.createElement('div');
+        div.className = 'saved__tooltip';
+        var h3 = document.createElement('h3');
+        var text = document.createTextNode('Game saved successfuly!');
+        h3.appendChild(text);
+        div.appendChild(h3);
+        document.getElementById('menu-modal').appendChild(div);
+        setTimeout(function () {
+          div.parentElement.removeChild(div);
+        }, 2000);
+      },
+    });
+  });
+}

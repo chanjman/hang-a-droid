@@ -33,6 +33,7 @@ h1, h2
 .every-page-header
   display: flex
   justify-content: center
+  position: relative
   padding: 1.5rem 0
 
 .title
@@ -42,7 +43,7 @@ h1, h2
   -webkit-text-fill-color: transparent
   text-align: center
   font-family: Coustard, serif
-  font-size: 3rem
+  font-size: 2rem
   letter-spacing: 2px
 
 .title--smaller
@@ -294,6 +295,7 @@ header, main
 
 .modal-header h2
   margin: auto
+
 /* Modal Body
 
 .modal-body
@@ -306,7 +308,7 @@ header, main
 
 .modal-content
   position: relative
-  top: 14em
+  top: 20%
   background-color: #fefefe
   margin: auto
   padding: 0
@@ -341,7 +343,7 @@ header, main
     opacity: 0
 
   to
-    top: 14em
+    top: 20%
     opacity: 1
 
 /*-------- Text spin ---------
@@ -402,12 +404,31 @@ header, main
 
   &:hover
     cursor: pointer
+
   &:hover span
-    background-color: $complementary
+    background: linear-gradient(330deg, $complementary 0%, #9952e0 25%, #52e0e0 50%, #99e052 75%, $primary 100%)
+
 
 .menu span
   margin: 0.2em 0
   width: 3em
   height: 0.5em
   border-radius: 1em
+  background: linear-gradient(330deg, $primary 0%, #99e052 25%, #52e0e0 50%, #9952e0 75%, $complementary 100%)
+
+.nosaved
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+
+.saved__tooltip
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
   background-color: $primary
+  text-align: center
+
+  h3
+    color: white

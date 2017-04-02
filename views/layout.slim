@@ -7,11 +7,10 @@ html
     link rel="icon" type="image/png" href="/assets/favicon.png"
     link rel='stylesheet' type='text/css' href=url('/assets/normalize.css')
     link rel='stylesheet' type='text/css' href=url('/assets/main.css')
-    script src="https://use.fontawesome.com/2be2a1d5d1.js"  
   body
     header.every-page-header
-      a href="/"
-        h1.title Hang-a-droid
+      a.title href="/"
+        h1 Hang-a-droid
       == slim :menu
     == yield
 
