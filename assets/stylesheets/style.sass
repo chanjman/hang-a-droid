@@ -28,21 +28,30 @@ hr
 
 h1, h2
   margin: 0
-  padding: 0.67em 0
 
 /*------- Header ----------
+.every-page-header
+  display: flex
+  justify-content: center
+  padding: 1.5rem 0
+
 .title
-  color: $complementary
+  display: table
+  background: linear-gradient(330deg, $primary 0%, #99e052 25%, #52e0e0 50%, #9952e0 75%, $complementary 100%)
+  -webkit-background-clip: text
+  -webkit-text-fill-color: transparent
   text-align: center
   font-family: Coustard, serif
   font-size: 3rem
   letter-spacing: 2px
 
-  span
-    color: $primary
-
 .title--smaller
   font-size: 2.3rem
+  text-align: center
+  font-family: Coustard, serif
+  letter-spacing: 2px
+  color: $complementary
+  padding: 1.5rem 0
 
 /*---------- Main landing area ---------
 section
@@ -63,7 +72,7 @@ section
   padding: 0.7rem 1.7rem
   margin: 1rem
   border-radius: 1.5rem
-  border: 1px #95a5a6 solid
+  border: 1px solid transparent
   color: white
   font-size: 1.5rem
   &:hover
@@ -73,13 +82,13 @@ section
 .btn--primary
   background-color: $primary
   &:hover
-    border-color: $primary
+    border: 1px $primary solid
     color: $primary
 
 .btn--complementary
   background-color: $complementary
   &:hover
-    border-color: $complementary
+    border: 1px $complementary solid
     color: $complementary
 
 /*------ OnPageLoad animation --------
@@ -188,6 +197,8 @@ header, main
   color: rgb(51, 32, 54)
   span
     color: rgb(92, 181, 74)
+  span.critical
+    color: rgb(149, 46, 46)
 
 /*------- Choice ----------
 .choice
@@ -198,6 +209,7 @@ header, main
   align-items: center
 
 .choice__cta
+  padding: 1em 0
   text-align: center
   color: rgb(150, 95, 160)
 
@@ -272,7 +284,7 @@ header, main
 
 .modal-header
   text-align: center
-  padding: 2px 16px
+  padding: 1em 1em
   background-color: $primary
   border-radius: 1em 1em 0 0
   color: white
@@ -344,6 +356,7 @@ header, main
   align-items: center
 
 .load-list__container
+  max-width: 80%
   margin: 0
   padding: 40px
   display: flex
@@ -352,17 +365,17 @@ header, main
 
 .load-list__wrapper
   background-color: white
-  max-width: 100%
+  width: 11em
   padding: 1.5em
   margin: 1em
   border: 1px lightgrey solid
-  box-shadow: 0 1px 3px 2px rgba(0, 0, 0, .2)
   transition: all 0.3s ease
+  box-shadow: 0 10px 6px -6px #777
 
   &:hover
     cursor: pointer
-    background-color: rgba(46,204,113, 0.2)
-    transform: scale(1.048, 1.048)
+    transform: scale3d(1, 1, 1)
+    box-shadow: 0 10px 6px -4px #777
 
 .load-list__cell
   text-align: center
