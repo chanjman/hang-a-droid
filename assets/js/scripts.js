@@ -118,8 +118,8 @@ function gameOverRoutine(state, secret) {
 
   if (state.win) {
     setTimeout((function () {
-      $('.letter span').addClass('neon_glow');
-    }), 800);
+      $('.letter span').addClass('letters-spin');
+    }), 0);
     setTimeout((function () {
       openModal(winMsg);
     }), 3000);

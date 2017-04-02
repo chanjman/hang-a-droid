@@ -172,8 +172,8 @@ header, main
     color: rgb(92, 181, 74)
     text-align: center
 
-.letter span.neon_glow
-  animation: neon 1.5s ease-in-out infinite alternate
+.letter span.letters-spin
+  animation: spin_letters 1.5s ease-in-out infinite alternate
 
 .letter--overlay.hidden
   transform: rotateX(90deg)
@@ -344,9 +344,9 @@ header, main
     top: 14em
     opacity: 1
 
-/*-------- Text glow ---------
+/*-------- Text spin ---------
 
-@keyframes neon
+@keyframes spin_letters
   from
     transform: rotateY(0)
 
