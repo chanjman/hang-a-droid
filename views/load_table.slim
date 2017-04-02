@@ -10,7 +10,7 @@
           hr
         .load-list__cell
           h4.load-list__cell__header Guessed letters
-          p.load-list__cell__content= save[:guessed_letters].join(' - ')
+          p.load-list__cell__content= save[:guessed_letters].map { |ltr| (ltr.empty?) ? '_' : ltr }.join(' ')
           hr
         .load-list__cell
           h4.load-list__cell__header Used letters

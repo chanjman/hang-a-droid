@@ -60,6 +60,7 @@ class ApplicationController < Sinatra::Base
 
   get '/save' do
     SaveLoad.new.save_game(session[:game].to_save)
+    return
   end
 
   get '/new' do
