@@ -5,7 +5,6 @@ var movesCheck = null;
 guessedLetters = [];
 
 $(document).ready(function () {
-  changeDroidOpacity();
   clickLetter();
   disableEnterOnForms();
   if (window.location.href.match(/new-game\?/)) {
@@ -15,17 +14,16 @@ $(document).ready(function () {
   if (window.location.href.match(/new\?|new/)) {
     closeModal();
     guessTheLetter();
+    changeDroidOpacity();
   }
 });
 
 function changeDroidOpacity() {
-  if (window.location.href.match(/new/)) {
-    $.each(hangParts, function (key, value) {
-      return $(value).css({
-        opacity: '0.2',
-      });
+  $.each(hangParts, function (key, value) {
+    return $(value).css({
+      opacity: '0.2',
     });
-  }
+  });
 };
 
 function parseGuessData(data) {
@@ -48,24 +46,34 @@ function parseGuessData(data) {
   };
 };
 
-function placeLetter(guessed) {
-  var currLetter = [];
+function showLetter(ltr, idx, currLetter) {
+  if (currLetter.indexOf(ltr) !== -1) {
+    $('.letter span').eq(idx).html(ltr);
+    setTimeout(function () {
+      $('.letter--overlay').eq(idx).addClass('hidden');
+    }, 0);
+    guessedLetters.push(ltr);
+  }
+};
 
-  currLetter = guessed.filter(function (ltr) {
+function placeLetter(guessed) {
+
+  var currLetter = guessed.filter(function (ltr) {
     return (guessedLetters.indexOf(ltr) === -1 && ltr !== '');
   });
 
-  guessed.forEach(function (ltr, idx) {
-    if (currLetter.indexOf(ltr) !== -1) {
-      $('.letter span').eq(idx).html(ltr);
-      setTimeout((function () {
-        $('.letter--overlay').eq(idx).addClass('hidden');
-      }
-    ), 300);
-      guessedLetters.push(ltr);
-    }
-  });
+  for (var i = 0, len = guessed.length; i < len; i++) {
+    showLetter(guessed[i], i, currLetter);
+  };
 };
+
+function spinTheDroid(idx) {
+  setTimeout(function () {
+    $(hangParts[idx]).css({
+      opacity: '1',
+    }).addClass('spinner');
+  }, 0);
+}
 
 function hangTheDroid(remainingMoves) {
   var altMoves = [];
@@ -76,11 +84,9 @@ function hangTheDroid(remainingMoves) {
     altMoves.push(i);
   };
 
-  altMoves.forEach(function (idx) {
-    $(hangParts[idx]).css({
-      opacity: '1',
-    }).addClass('spinner');
-  });
+  for (var i = 0, len = altMoves.length; i < len; i++) {
+    spinTheDroid(altMoves[i]);
+  };
 
   $('.remaining_moves span').effect('highlight', {
     color: '#8e44ad',
@@ -90,9 +96,7 @@ function hangTheDroid(remainingMoves) {
 function checkMoves(remainingMoves) {
   $('.remaining_moves span').text(remainingMoves);
   if (remainingMoves < 4) {
-    $('.remaining_moves span').css({
-      color: 'rgb(149, 46, 46)',
-    });
+    $('.remaining_moves span').addClass('critical');
   }
 
   if (movesCheck >= remainingMoves) {
@@ -153,11 +157,14 @@ function guessTheLetter(letter) {
     success: function (data) {
       var hangData;
       hangData = parseGuessData(data);
-      if (movesCheck == null) { movesCheck = hangData.moves; };
 
-      placeLetter(hangData.guessed);
-      checkMoves(hangData.moves);
-      colorUsedLetters(hangData.used);
+      setTimeout(function () {
+        placeLetter(hangData.guessed);
+        checkMoves(hangData.moves);
+        colorUsedLetters(hangData.used);
+      }, 0);
+
+      if (movesCheck == null) { movesCheck = hangData.moves; };
 
       if (hangData.win) {
         return gameOverRoutine({
@@ -213,17 +220,23 @@ function closeModal() {
 };
 
 function clickLetter() {
-  return $('.alphabet__letter span').click(function () {
+  $('.alphabet__letter span').click(function () {
     letter = $(this).text();
-    colorUsedLetters([letter]);
-    guessTheLetter(letter);
+    setTimeout(function () {
+      colorUsedLetters([letter]);
+      guessTheLetter(letter);
+    }, 0);
   });
 };
+
+function justColor(letter, alphabet) {
+  $('.alphabet__letter span').eq(alphabet.indexOf(letter)).parent().addClass('alphabet__letter--used');
+}
 
 function colorUsedLetters(letters) {
   var alphabet = $('.alphabet__letter span').text().split('');
 
-  letters.forEach(function (letter) {
-    $('.alphabet__letter span').eq(alphabet.indexOf(letter)).parent().addClass('alphabet__letter--used');
-  });
+  for (var i = 0, len = letters.length; i < len; i++) {
+    justColor(letters[i], alphabet);
+  };
 };
