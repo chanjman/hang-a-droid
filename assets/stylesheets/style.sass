@@ -283,16 +283,21 @@ header, main
 /* Modal Header
 
 .modal-header
+  display: flex
+  justify-content: space-between
+  align-items: center
   text-align: center
-  padding: 1em 1em
+  padding: 1.5em
   background-color: $primary
   border-radius: 1em 1em 0 0
   color: white
 
+.modal-header h2
+  margin: auto
 /* Modal Body
 
 .modal-body
-  padding: 2px 16px
+  padding: 1em
   display: flex
   flex-direction: column
   align-items: center
@@ -320,9 +325,9 @@ header, main
 /* The Close Button
 
 .modal-close
+  align-self: flex-start
   color: white
-  float: right
-  font-size: 28px
+  font-size: 2.6em
   font-weight: bold
   &:hover, &:focus
     color: black
@@ -384,3 +389,25 @@ header, main
 
 .load-list__cell__content
   margin: 0
+
+/* -------- Menu -----------
+.menu
+  position: absolute
+  top: 0.9em
+  right: 0.9em
+  margin: 1em
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+
+  &:hover
+    cursor: pointer
+  &:hover span
+    background-color: $complementary
+
+.menu span
+  margin: 0.2em 0
+  width: 3em
+  height: 0.5em
+  border-radius: 1em
+  background-color: $primary
