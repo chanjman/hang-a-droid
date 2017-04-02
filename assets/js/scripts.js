@@ -11,7 +11,7 @@ $(document).ready(function () {
     hideShowSubmitButton();
   }
 
-  if (window.location.href.match(/new\?|new/)) {
+  if (window.location.href.match(/new\?|new|load\/.+/)) {
     closeModal();
     guessTheLetter();
     changeDroidOpacity();
@@ -208,6 +208,7 @@ function closeModal() {
   var span, modal;
   modal = document.getElementById('game-over-modal');
   span = $('.modal-close')[0];
+
   span.onclick = function () {
     modal.style.display = 'none';
   };

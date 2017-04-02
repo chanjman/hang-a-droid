@@ -1,11 +1,11 @@
-.modal#game-over-modal
+.modal#menu-modal
   .modal-content
     .modal-header
-      h2
-      span.modal-close &times;
+      h2 What would you like to do?
+      span.modal-close#menu-close &times;
     .modal-body
-      p.modal__secret Secret word was <span>'#{@game.secret_word.join}'</span>
-      hr
+      form action='/' type='GET'
+        input.btn.btn--complementary#new type='submit' value='Home page'
       form action='/new' type='GET'
         input.btn.btn--complementary#new type='submit' value='New game'
       form action='/load' type='GET'
