@@ -11,7 +11,7 @@ $(document).ready(function () {
     hideShowSubmitButton();
   }
 
-  if (window.location.href.match(/new\?|new|load\/.+/)) {
+  if (window.location.href.match(/new\?.+|load\/.+/)) {
     changeDroidOpacity();
     closeModal();
     guessTheLetter();
