@@ -238,7 +238,7 @@ function closeModal() {
 };
 
 function clickLetter() {
-  $('.alphabet__letter span').click(function () {
+  $('.alphabet__letter span').on('click touch', function () {
     letter = $(this).text();
     setTimeout(function () {
       colorUsedLetters([letter]);
