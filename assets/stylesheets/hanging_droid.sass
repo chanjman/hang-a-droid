@@ -146,7 +146,7 @@
     fill-mode: forwards
   transition: transform 1s linear
 
-@media screen and(max-device-width: 480px)
+@media screen and(min-device-width: 320px)
 
   .gallows
     left: calc(50% - 100px)
@@ -155,5 +155,12 @@
   .android
     top: -4.5em
     margin: auto
-    left: calc(50% - 105px)
+    left: calc(50% - 95px)
     font-size: 60%
+
+@media screen and(min-device-width: 768px)
+  .gallows
+    font-size: 90%
+
+  .android
+    font-size: 80%

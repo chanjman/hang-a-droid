@@ -109,7 +109,7 @@ function openModal(msg) {
   modal = document.getElementById('game-over-modal');
 
   modal.style.display = 'block';
-  $('.modal__header h2').text(msg);
+  $('#game-over-modal .modal__header h2').text(msg);
 };
 
 function gameOverRoutine(state, secret) {
