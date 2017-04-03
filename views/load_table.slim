@@ -23,6 +23,14 @@
 - else
 
   .nosaved
-    h3 No saved games found. Wanna play a new game? <br>
-    form action='/new-game' type='GET'
-      input.btn.btn--complementary#new type='submit' value='New game'
+    h3 No saved games found. Wanna play a new game?
+
+    - if session[:name]
+
+      form action='/new' type='GET'
+        input.btn.btn--complementary#new type='submit' value='New game'
+
+    - else
+
+      form action='/new-game' type='GET'
+        input.btn.btn--complementary#new type='submit' value='New game'
