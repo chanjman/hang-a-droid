@@ -10,7 +10,5 @@
         input.btn.btn--complementary#new type='submit' value='New game'
       form action='/load' type='GET'
         input.btn.btn--primary#load type='submit' value='Load Game'
-      - if @savebtn
-
-        form action='/save' type='GET'
-          input.btn.btn--primary#save type='submit' value='Save Game'
+      form action='/save' type='GET'
+        input.btn.btn--primary#save type='submit' value='Save Game'

@@ -13,10 +13,7 @@ class ApplicationController < Sinatra::Base
   set :environment, Sprockets::Environment.new
 
   configure do
-    use Rack::Session::Cookie, key: 'rack.session',
-                               path: '/',
-                               expire_after: 2_592_000,
-                               secret: '4ary9j6kT&vJ8%6PVUSmdk7RVqQn@z4$A5ZA2bHab2Na#8*T8E$q6'
+    enable :sessions
   end
 
   # append assets paths
@@ -53,7 +50,6 @@ class ApplicationController < Sinatra::Base
     @game = Game.new(load_game_data)
     @player = @game.player
     session[:game] = @game
-    @savebtn = true
 
     slim :new
   end
@@ -68,7 +64,6 @@ class ApplicationController < Sinatra::Base
     @player = session[:name]
     @game = Game.new(player: @player)
     session[:game] = @game
-    @savebtn = true
 
     slim :new
   end
