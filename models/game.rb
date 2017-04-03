@@ -53,6 +53,7 @@ class Game
     {
       guessed_letters: guessed_letters,
       remaining_moves: remaining_moves,
+      secret_word: secret_word,
       used_letters: used_letters,
       win: win?,
       lost: lost?
