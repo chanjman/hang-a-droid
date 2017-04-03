@@ -1,7 +1,7 @@
 hangParts = ['.pole', '.level-beam', '.cross-beam', '.down-beam',
              '.head', '.lant', '.rant', '.body', '.arm', '.leg'];
 
-var movesCheck = null;
+movesCheck = null;
 guessedLetters = [];
 
 $(document).ready(function () {
@@ -12,9 +12,9 @@ $(document).ready(function () {
   }
 
   if (window.location.href.match(/new\?|new|load\/.+/)) {
+    changeDroidOpacity();
     closeModal();
     guessTheLetter();
-    changeDroidOpacity();
   }
 
   openMenu();
@@ -22,11 +22,11 @@ $(document).ready(function () {
 });
 
 function changeDroidOpacity() {
-  $.each(hangParts, function (key, value) {
-    return $(value).css({
+  for (var i = 0, len = hangParts.length; i < len; i++) {
+    $(hangParts[i]).css({
       opacity: '0.2',
     });
-  });
+  };
 };
 
 function parseGuessData(data) {
@@ -114,8 +114,8 @@ function openModal(msg) {
 
 function gameOverRoutine(state, secret) {
   var i, lostMsg, results, winMsg;
-  winMsg = 'You guessed it!!';
-  lostMsg = 'You didn\'t guess it';
+  winMsg = 'You saved the droid!!';
+  lostMsg = 'You got him hanged...';
 
   if (state.win) {
     setTimeout(function () {
@@ -137,14 +137,11 @@ function gameOverRoutine(state, secret) {
   if (state.win || state.lost) {
     $('.alphabet__letter').addClass('alphabet__letter--used');
     i = $('.letter').length - 1;
-    results = [];
     while (i >= 0) {
       $('.letter span').eq(i).html(secret[i]);
       $('.letter--overlay').eq(i).addClass('hidden');
-      results.push(i--);
+      i--;
     }
-
-    return results;
   }
 };
 
@@ -160,11 +157,11 @@ function guessTheLetter(letter) {
       var hangData;
       hangData = parseGuessData(data);
 
+      if (movesCheck == null) { movesCheck = hangData.moves; };
+
       placeLetter(hangData.guessed);
       checkMoves(hangData.moves);
       colorUsedLetters(hangData.used);
-
-      if (movesCheck == null) { movesCheck = hangData.moves; };
 
       if (hangData.win) {
         return gameOverRoutine({
