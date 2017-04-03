@@ -50,6 +50,7 @@ class ApplicationController < Sinatra::Base
     @game = Game.new(load_game_data)
     @player = @game.player
     session[:game] = @game
+    @menu = true
 
     slim :new
   end
@@ -64,6 +65,7 @@ class ApplicationController < Sinatra::Base
     @player = session[:name]
     @game = Game.new(player: @player)
     session[:game] = @game
+    @menu = true
 
     slim :new
   end

@@ -11,7 +11,9 @@ html
     header.every-page-header
       a.title href="/"
         h1 Hang-a-droid
-      == slim :menu
+      - if @menu 
+        == slim :menu
+
     == yield
 
     /! Scripts  
