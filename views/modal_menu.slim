@@ -6,8 +6,13 @@
     .modal-body
       form action='/' type='GET'
         input.btn.btn--complementary#new type='submit' value='Home page'
-      form action='/new' type='GET'
-        input.btn.btn--complementary#new type='submit' value='New game'
+      - if session[:name]
+        form action='/new' type='GET'
+          input.btn.btn--complementary#new type='submit' value='New game'
+      - else
+      
+        form action='/new-game' type='GET'
+          input.btn.btn--complementary#new type='submit' value='New game'
       form action='/load' type='GET'
         input.btn.btn--primary#load type='submit' value='Load Game'
       form action='/save' type='GET'
