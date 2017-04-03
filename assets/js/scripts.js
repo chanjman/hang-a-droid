@@ -71,11 +71,9 @@ function placeLetter(guessed) {
 };
 
 function spinTheDroid(idx) {
-  setTimeout(function () {
-    $(hangParts[idx]).css({
-      opacity: '1',
-    }).addClass('spinner');
-  }, 0);
+  $(hangParts[idx]).css({
+    opacity: '1',
+  }).addClass('spinner');
 }
 
 function hangTheDroid(remainingMoves) {
@@ -120,9 +118,10 @@ function gameOverRoutine(state, secret) {
   lostMsg = 'You didn\'t guess it';
 
   if (state.win) {
-    setTimeout((function () {
+    setTimeout(function () {
       $('.letter span').addClass('letters-spin');
-    }), 0);
+    });
+
     setTimeout((function () {
       openModal(winMsg);
     }), 3000);
@@ -161,11 +160,9 @@ function guessTheLetter(letter) {
       var hangData;
       hangData = parseGuessData(data);
 
-      setTimeout(function () {
-        placeLetter(hangData.guessed);
-        checkMoves(hangData.moves);
-        colorUsedLetters(hangData.used);
-      }, 0);
+      placeLetter(hangData.guessed);
+      checkMoves(hangData.moves);
+      colorUsedLetters(hangData.used);
 
       if (movesCheck == null) { movesCheck = hangData.moves; };
 
