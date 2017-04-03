@@ -50,7 +50,6 @@ class ApplicationController < Sinatra::Base
     @game = Game.new(load_game_data)
     @player = @game.player
     session[:game] = @game
-    @menu = true
 
     slim :new
   end
@@ -61,19 +60,19 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/new' do
-    session[:name] = params[:name] unless params[:name].nil?
+    session[:name] = params[:name] unless (params[:name].nil? || params[:name].empty?)
     @player = session[:name]
     @game = Game.new(player: @player)
     session[:game] = @game
-    @menu = true
 
     slim :new
   end
 
   post '/guess' do
     letter = params[:guess]
-    return session[:game].json_response.to_json if letter.empty?
-    session[:game].good_guess(letter)
-    session[:game].json_response.to_json
+    game = session[:game]
+    return game.json_response.to_json if letter.empty? || letter.nil?
+    game.good_guess(letter)
+    game.json_response.to_json
   end
 end
