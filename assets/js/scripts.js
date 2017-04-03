@@ -11,7 +11,7 @@ $(document).ready(function () {
     hideShowSubmitButton();
   }
 
-  if (window.location.href.match(/new\?.+|load\/.+/)) {
+  if (window.location.href.match(/new\??.+|load\/.+/)) {
     changeDroidOpacity();
     closeModal();
     guessTheLetter();
@@ -109,7 +109,7 @@ function openModal(msg) {
   modal = document.getElementById('game-over-modal');
 
   modal.style.display = 'block';
-  $('.modal-header h2').text(msg);
+  $('.modal__header h2').text(msg);
 };
 
 function gameOverRoutine(state, secret) {
@@ -224,7 +224,7 @@ function openMenu() {
 function closeModal() {
   var span, modal;
   modal = document.getElementById('game-over-modal');
-  span = $('.modal-close')[0];
+  span = $('.modal__close')[0];
 
   span.onclick = function () {
     modal.style.display = 'none';
