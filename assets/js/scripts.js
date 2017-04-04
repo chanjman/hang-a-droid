@@ -44,7 +44,7 @@ function parseGuessData(data) {
 
 function showLetter(ltr, idx, currLetter) {
   if (currLetter.indexOf(ltr) !== -1) {
-    $('.letter span').eq(idx).inerHTML(ltr);
+    $('.letter span').eq(idx).html(ltr);
     setTimeout(function () {
       $('.letter--overlay').eq(idx).addClass('hidden');
     }, 0);
