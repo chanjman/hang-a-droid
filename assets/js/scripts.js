@@ -1,4 +1,4 @@
-hangParts = ['.pole', '.level-beam', '.cross-beam', '.down-beam',
+const hangParts = ['.pole', '.level-beam', '.cross-beam', '.down-beam',
              '.head', '.lant', '.rant', '.body', '.arm', '.leg'];
 
 movesCheck = null;
@@ -30,28 +30,21 @@ function changeDroidOpacity() {
 };
 
 function parseGuessData(data) {
-  var guessed, hangData, lost, moves, secret, win, used;
   hangData = JSON.parse(data);
-  moves = hangData.remaining_moves;
-  guessed = hangData.guessed_letters;
-  win = hangData.win;
-  lost = hangData.lost;
-  secret = hangData.secret_word;
-  used = hangData.used_letters;
 
   return {
-    moves: moves,
-    guessed: guessed,
-    win: win,
-    lost: lost,
-    secret: secret,
-    used: used,
+    moves: hangData.remaining_moves,
+    guessed: hangData.guessed_letters,
+    win: hangData.win,
+    lost: hangData.lost,
+    secret: hangData.secret_word,
+    used: hangData.used_letters,
   };
 };
 
 function showLetter(ltr, idx, currLetter) {
   if (currLetter.indexOf(ltr) !== -1) {
-    $('.letter span').eq(idx).html(ltr);
+    $('.letter span').eq(idx).inerHTML(ltr);
     setTimeout(function () {
       $('.letter--overlay').eq(idx).addClass('hidden');
     }, 0);
@@ -70,12 +63,6 @@ function placeLetter(guessed) {
   };
 };
 
-function spinTheDroid(idx) {
-  $(hangParts[idx]).css({
-    opacity: '1',
-  }).addClass('spinner');
-}
-
 function hangTheDroid(remainingMoves) {
   var altMoves = [];
   var limit = 9 - remainingMoves;
@@ -85,8 +72,10 @@ function hangTheDroid(remainingMoves) {
     altMoves.push(i);
   };
 
-  for (var i = 0, len = altMoves.length; i < len; i++) {
-    spinTheDroid(altMoves[i]);
+  for (var idx = 0, len = altMoves.length; idx < len; idx++) {
+    $(hangParts[idx]).css({
+      opacity: '1',
+    }).addClass('spinner');
   };
 
   $('.remaining_moves span').effect('highlight', {
