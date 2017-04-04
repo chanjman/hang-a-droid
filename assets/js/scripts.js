@@ -1,4 +1,4 @@
-const hangParts = ['.pole', '.level-beam', '.cross-beam', '.down-beam',
+hangParts = ['.pole', '.level-beam', '.cross-beam', '.down-beam',
              '.head', '.lant', '.rant', '.body', '.arm', '.leg'];
 
 movesCheck = null;
@@ -30,15 +30,22 @@ function changeDroidOpacity() {
 };
 
 function parseGuessData(data) {
-  var hangData = JSON.parse(data);
+  var guessed, hangData, lost, moves, secret, win, used;
+  hangData = JSON.parse(data);
+  moves = hangData.remaining_moves;
+  guessed = hangData.guessed_letters;
+  win = hangData.win;
+  lost = hangData.lost;
+  secret = hangData.secret_word;
+  used = hangData.used_letters;
 
   return {
-    moves: hangData.remaining_moves,
-    guessed: hangData.guessed_letters,
-    win: hangData.win,
-    lost: hangData.lost,
-    secret: hangData.secret_word,
-    used: hangData.used_letters,
+    moves: moves,
+    guessed: guessed,
+    win: win,
+    lost: lost,
+    secret: secret,
+    used: used,
   };
 };
 
