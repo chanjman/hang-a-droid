@@ -248,6 +248,22 @@ function colorUsedLetters(letters) {
   };
 };
 
+function flashNotice(msg) {
+  var div = document.createElement('div');
+  div.className = 'flash-notice';
+
+  var h3 = document.createElement('h3');
+  var text = document.createTextNode(msg);
+
+  h3.appendChild(text);
+  div.appendChild(h3);
+  document.body.appendChild(div);
+
+  setTimeout(function () {
+    div.parentElement.removeChild(div);
+  }, 2000);
+};
+
 function saveGame() {
   $('#save').click(function (e) {
     e.preventDefault();
@@ -255,16 +271,7 @@ function saveGame() {
     $.ajax('/save', {
       type: 'GET',
       success: function () {
-        var div = document.createElement('div');
-        div.className = 'saved__tooltip';
-        var h3 = document.createElement('h3');
-        var text = document.createTextNode('Game saved successfuly!');
-        h3.appendChild(text);
-        div.appendChild(h3);
-        document.getElementById('menu-modal').appendChild(div);
-        setTimeout(function () {
-          div.parentElement.removeChild(div);
-        }, 2000);
+        flashNotice('Game saved successfuly');
       },
     });
   });
