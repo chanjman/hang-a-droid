@@ -143,8 +143,12 @@ function guessTheLetter(letter) {
       guess: letter,
     },
     success: function (data) {
-      var hangData;
-      hangData = parseGuessData(data);
+      console.log(data);
+      if (data != {}) {
+        var hangData = parseGuessData(data);
+      } else {
+        return;
+      }
 
       if (movesCheck == null) { movesCheck = hangData.moves; };
 
