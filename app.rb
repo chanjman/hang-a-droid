@@ -71,7 +71,7 @@ class ApplicationController < Sinatra::Base
   post '/guess' do
     letter = params[:guess]
     game = session[:game]
-    return game.json_response.to_json if letter.empty? || letter.nil?
+    return game.json_response.to_json if letter.empty?
     game.good_guess(letter)
     game.json_response.to_json
   end
