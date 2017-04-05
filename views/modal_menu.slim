@@ -15,6 +15,6 @@
           input.btn.btn--complementary#new type='submit' value='New game'
       form action='/load' type='GET'
         input.btn.btn--primary#load type='submit' value='Load Game'
-      - if session[:game] && !session[:game].remaining_moves.zero?
+      - if session[:game] && (!session[:game].win? && !session[:game].lost?)
         form action='/save' type='GET'
           input.btn.btn--primary#save type='submit' value='Save Game'
