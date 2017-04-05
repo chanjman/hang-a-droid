@@ -19,6 +19,7 @@ $(document).ready(function () {
 
   openMenu();
   saveGame();
+  loadCloseBtn();
 });
 
 function changeDroidOpacity() {
@@ -143,7 +144,6 @@ function guessTheLetter(letter) {
       guess: letter,
     },
     success: function (data) {
-      console.log(data);
       if (data != {}) {
         var hangData = parseGuessData(data);
       } else {
@@ -279,4 +279,25 @@ function saveGame() {
       },
     });
   });
+}
+
+function loadCloseBtn() {
+  var wrapper = document.getElementsByClassName('load-list__wrapper')[0];
+  $(document).delegate('.load-list__wrapper', 'click', deleteGame);
+}
+
+function deleteGame(e) {
+  e.preventDefault();
+  var id = e.target.parentElement.parentElement.getAttribute('href').split('/')[2];
+  if (e.target !== e.currentTarget) {
+    $.ajax('/delete', {
+      type: 'DELETE',
+      data: { id: id },
+      success: function (data) {
+        var container = document.getElementById('load-list__container').innerHTML = data;
+      },
+    });
+  }
+
+  e.stopPropagation();
 }

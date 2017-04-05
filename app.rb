@@ -41,7 +41,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/load' do
-    @saved= SaveLoad.new.saved_games
+    @saved = SaveLoad.new.saved_games
     slim :load_game
   end
 
@@ -74,5 +74,12 @@ class ApplicationController < Sinatra::Base
     return game.json_response.to_json if letter.empty?
     game.good_guess(letter)
     game.json_response.to_json
+  end
+
+  delete '/delete' do
+    SaveLoad.new.delete_game(params[:id])
+    @saved = SaveLoad.new.saved_games
+
+    slim :load_table, layout: false
   end
 end
