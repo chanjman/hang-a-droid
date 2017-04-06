@@ -43,4 +43,8 @@ class SaveLoad
     saves.delete(savegame_by_id(input))
     write_save_to_file(saves)
   end
+
+  def delete_all
+    write_save_to_file(saved_games.clear)
+  end
 end

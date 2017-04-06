@@ -82,4 +82,11 @@ class ApplicationController < Sinatra::Base
 
     slim :load_table, layout: false
   end
+
+  delete '/delete-all' do
+    SaveLoad.new.delete_all
+    @saved = SaveLoad.new.saved_games
+
+    slim :load_table, layout: false
+  end
 end

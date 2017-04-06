@@ -20,6 +20,7 @@ $(document).ready(function () {
   openMenu();
   saveGame();
   loadCloseBtn();
+  deleteAllBtn();
 });
 
 function changeDroidOpacity() {
@@ -289,15 +290,41 @@ function loadCloseBtn() {
 function deleteGame(e) {
   e.preventDefault();
   var id = e.target.parentElement.parentElement.getAttribute('href').split('/')[2];
+  var $container = $('#load-wrapper');
+
   if (e.target !== e.currentTarget) {
-    $.ajax('/delete', {
-      type: 'DELETE',
-      data: { id: id },
-      success: function (data) {
-        var container = document.getElementById('load-list__container').innerHTML = data;
-      },
-    });
+    $(this).parent().addClass('removed-item-all');
+
+    setTimeout(function () {
+      $.ajax('/delete', {
+        type: 'DELETE',
+        data: { id: id },
+        success: function (data) {
+          $container.html(data);
+        },
+      });
+    }, 1200);
   }
 
   e.stopPropagation();
+}
+
+function deleteAllBtn() {
+  $(document).delegate('#delete-all', 'click', deleteAll);
+}
+
+function deleteAll() {
+  var $container = $('#load-wrapper');
+
+  var elements = document.getElementById('load-list__container');
+  elements.classList.add('removed-item-opscale');
+
+  setTimeout(function () {
+    $.ajax('/delete-all', {
+      type: 'DELETE',
+      success: function (data) {
+        $container.html(data);
+      },
+    });
+  }, 600);
 }

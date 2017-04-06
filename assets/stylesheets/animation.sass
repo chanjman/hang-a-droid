@@ -1,0 +1,16 @@
+.removed-item-all
+  animation: removed-item-opscale .6s forwards, removed-item-translate .6s .6s forwards
+
+.removed-item-opscale
+  animation: removed-item-opscale .6s forwards
+
+@keyframes removed-item-opscale
+  from
+    opacity: 1
+
+  to
+    opacity: 0
+
+@keyframes removed-item-translate
+  to
+    margin-left: -258px

@@ -131,6 +131,15 @@ section
     border: 1px $complementary solid
     color: $complementary
 
+.btn--danger
+  background-color: #e74c3c
+  &:hover
+    border: 1px #e74c3c solid
+    color: #e74c3c
+
+.btn--smaller
+  padding: 0.4rem 1.4rem
+  font-size: 1rem
 /*------ OnPageLoad animation --------
 @keyframes animateIn
   0%
@@ -487,12 +496,10 @@ header, main
   align-items: center
 
 .load-list__container
-  max-width: 80%
-  margin: 0
-  padding: 40px
   display: flex
-  justify-content: center
+  justify-content: flex-start
   flex-wrap: wrap
+  transition: opacity 0.5s
 
 .load-list__wrapper
   position: relative
@@ -503,6 +510,11 @@ header, main
   border: 1px lightgrey solid
   transition: all 0.3s ease
   box-shadow: 0 10px 6px -6px #777
+  -webkit-transition: all .2s ease-in
+  -moz-transition: all .2s ease-in
+  -o-transition: all .2s ease-in
+  -ms-transition: all .2s ease-in
+  transition: all .2s ease-in
 
   &:hover
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)
@@ -532,6 +544,21 @@ header, main
   border: 1px lightgrey solid
   &:hover
     color: black
+
+.load__wrapper
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  max-width: 80%
+  margin: 0
+  padding: 40px
+
+@media screen and(max-width: 1200px)
+  .load-list__close
+    opacity: 1
+    color: black
+
 
 /* -------- Menu -----------
 .menu
