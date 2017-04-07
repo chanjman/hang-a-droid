@@ -283,16 +283,23 @@ function saveGame() {
 }
 
 function loadCloseBtn() {
-  var wrapper = document.getElementsByClassName('load-list__wrapper')[0];
   $(document).delegate('.load-list__wrapper', 'click', deleteGame);
 }
 
 function deleteGame(e) {
-  e.preventDefault();
-  var id = e.target.parentElement.parentElement.getAttribute('href').split('/')[2];
-  var $container = $('#load-wrapper');
+  var target = e.target.parentElement.children[0];
+
+  if (e.target !== target) {
+    e.target = e.currentTarget;
+  }
 
   if (e.target !== e.currentTarget) {
+    e.stopPropagation();
+    e.preventDefault();
+
+    var id = e.target.parentElement.parentElement.getAttribute('href').split('/')[2];
+    var $container = $('#load-wrapper');
+
     $(this).parent().addClass('removed-item-all');
 
     setTimeout(function () {
@@ -305,8 +312,6 @@ function deleteGame(e) {
       });
     }, 1200);
   }
-
-  e.stopPropagation();
 }
 
 function deleteAllBtn() {

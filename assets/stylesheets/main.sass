@@ -169,6 +169,7 @@ section
   padding: 0.4rem 1.4rem
   font-size: 1rem
 
+
 /*------ OnPageLoad animation --------
 @-webkit-keyframes animateIn
   0%
@@ -497,12 +498,12 @@ header, main
 /*---------- Glow ------------
 @-webkit-keyframes spin
   from
-    -webkit-transform: rotateZ(0)
-    transform: rotateZ(0)
+    opacity: 0.2
+    box-shadow: 0
 
   to
-    -webkit-transform: rotateZ(360deg)
-    transform: rotateZ(360deg)
+    opacity: 1
+    box-shadow: 0 0 5px 5px #e74c3c
 
 
 .spinner
@@ -701,6 +702,7 @@ header, main
   flex-wrap: wrap
   -webkit-transition: opacity 0.5s
   transition: opacity 0.5s
+  box-sizing: border-box
 
 .load-list__wrapper
   position: relative
@@ -723,10 +725,12 @@ header, main
   text-align: center
 
 .load-list__cell__header
+  text-align: center
   color: #8e44ad
   margin: 0 0 1em
 
 .load-list__cell__content
+  text-align: center
   margin: 0
 
 .load-list__close

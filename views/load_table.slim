@@ -8,21 +8,17 @@
       a href="/load/#{save[:id]}"
         .load-list__wrapper
           span.load-list__close &times;
-          .load-list__cell
-            h4.load-list__cell__header Player
-            p.load-list__cell__content= save[:player]
-            hr
-          .load-list__cell
-            h4.load-list__cell__header Guessed letters
-            p.load-list__cell__content= save[:guessed_letters].map { |ltr| (ltr.empty?) ? '_' : ltr }.join(' ')
-            hr
-          .load-list__cell
-            h4.load-list__cell__header Used letters
-            p.load-list__cell__content= save[:used_letters].join(' ')
-            hr
-          .load-list__cell
-            h4.load-list__cell__header Remaining moves
-            p.load-list__cell__content= save[:remaining_moves]
+          h4.load-list__cell__header Player
+          p.load-list__cell__content= save[:player]
+          hr
+          h4.load-list__cell__header Guessed letters
+          p.load-list__cell__content= save[:guessed_letters].map { |ltr| (ltr.empty?) ? '_' : ltr }.join(' ')
+          hr
+          h4.load-list__cell__header Used letters
+          p.load-list__cell__content= save[:used_letters].join(' ')
+          hr
+          h4.load-list__cell__header Remaining moves
+          p.load-list__cell__content= save[:remaining_moves]
 
 - else
 
