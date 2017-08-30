@@ -1,8 +1,4 @@
 @import "normalize/import-now"
-//@import "style"
-//@import "hanging_droid"
-//@import "table"
-//@import "animation"
 
 *:focus
   outline: none
@@ -32,7 +28,7 @@ h1, h2
 main
   padding: 1rem
 
-/*------- Header ----------
+/*------- Header ----------*/
 
 .every-page-header
   width: 100%
@@ -99,7 +95,7 @@ main
     -ms-flex-pack: center
     justify-content: center
 
-/*---------- Main landing area ---------
+/*---------- Main landing area ---------*/
 
 section
   margin-top: 3rem
@@ -134,7 +130,7 @@ section
     -ms-flex-direction: row
     flex-direction: row
 
-/*-------- Buttons ----------
+/*-------- Buttons ----------*/
 
 .btn
   padding: 0.7rem 1.7rem
@@ -170,7 +166,8 @@ section
   font-size: 1rem
 
 
-/*------ OnPageLoad animation --------
+/*------ OnPageLoad animation --------*/
+
 @-webkit-keyframes animateIn
   0%
     -webkit-transform: translateY(-20em)
@@ -207,7 +204,7 @@ header, main
   -webkit-animation-fill-mode: both
   animation-fill-mode: both
 
-/*------- Forms, inputs -------
+/*------- Forms, inputs -------*/
 
 .form
   display: -webkit-box
@@ -239,7 +236,7 @@ header, main
 #play
   display: none
 
-/*------- Hang new ------------
+/*------- Hang new ------------*/
 
 .hang__container
   display: -webkit-box
@@ -283,7 +280,7 @@ header, main
     flex-direction: row
     margin: 3rem 0
 
-/*------- Secret word ---------
+/*------- Secret word ---------*/
 
 .secret-word__container
   display: -webkit-box
@@ -400,7 +397,7 @@ header, main
   .secret-word__container
     margin-left: 10em
 
-/*------- Choice ----------
+/*------- Choice ----------*/
 
 .choice
   width: 100%
@@ -495,7 +492,8 @@ header, main
   .alphabet
     width: 50%
 
-/*---------- Glow ------------
+/*---------- Glow ------------*/
+
 @-webkit-keyframes spin
   from
     opacity: 0.2
@@ -520,7 +518,7 @@ header, main
   border-color: #2ecc71
   box-shadow: 0 0 5px 5px #2ecc71
 
-/*--------- Modal ----------
+/*--------- Modal ----------*/
 
 .modal
   display: none
@@ -534,7 +532,7 @@ header, main
   background-color: black
   background-color: rgba(0, 0, 0, 0.6)
 
-/* Modal Header
+/*----- Modal Header --------*/
 
 .modal__header
   display: -webkit-box
@@ -557,7 +555,7 @@ header, main
   h2
     margin: auto
 
-/* Modal Body
+/*----- Modal Body -----*/
 
 .modal__body
   padding: 1em
@@ -578,7 +576,7 @@ header, main
 .modal__secret
   font-size: 1.5rem
 
-/* Modal Content
+/*------- Modal Content --------*/
 
 .modal__content
   position: relative
@@ -595,7 +593,7 @@ header, main
   -webkit-animation-duration: 0.4s
   animation-duration: 0.4s
 
-/* The Close Button
+/*------ The Close Button -----*/
 
 .modal__close
   -webkit-align-self: flex-start
@@ -629,7 +627,8 @@ header, main
   .modal__content
     width: 40%
 
-/* Add Animation
+/*----- Add Animation --------*/
+
 @-webkit-keyframes animatetop
   from
     top: -30em
@@ -650,7 +649,8 @@ header, main
     opacity: 1
 
 
-/*-------- Text spin ---------
+/*-------- Text spin ---------*/
+
 @-webkit-keyframes spin_letters
   from
     -webkit-transform: rotateY(0)
@@ -671,7 +671,7 @@ header, main
     transform: rotateY(360deg)
 
 
-/*--------- Load game -----------
+/*--------- Load game -----------*/
 
 .load-container
   display: -webkit-box
@@ -774,7 +774,7 @@ header, main
     opacity: 1
     color: black
 
-/* -------- Menu -----------
+/* -------- Menu -----------*/
 
 .menu
   position: absolute !important
@@ -873,7 +873,7 @@ td
   font-size: 12px
   border-bottom: solid 1px rgba(255, 255, 255, 0.1)
 
-/*-------- Android ---------
+/*-------- Android ---------*/
 
 .android
   font-size: 75%
@@ -883,7 +883,7 @@ td
   div
     background: #8e44ad
 
-/*--------- Head ------------
+/*--------- Head ------------*/
 
 .head
   height: 4.5em
@@ -902,9 +902,9 @@ td
   &:before
     right: 2.4em
 
-/*--------- Eyes ---------
+/*--------- Eyes ---------*/
 
-/*------- Antennas ------------
+/*------- Antennas ------------*/
 
 .lant, .rant
   height: 3em
@@ -925,7 +925,7 @@ td
   -ms-transform: rotate(30deg)
   transform: rotate(30deg)
 
-/*-------- Body -----------
+/*-------- Body -----------*/
 
 .body
   position: relative
@@ -940,7 +940,7 @@ td
   height: 6em
   border-radius: 1em
 
-/*-------Arms ------------
+/*-------Arms ------------*/
 
 .arm
   &:nth-of-type(1)
@@ -948,7 +948,7 @@ td
   &:nth-of-type(2)
     right: -2.6em
 
-/*------- Legs -----------
+/*------- Legs -----------*/
 
 .leg
   bottom: -3.25em
@@ -957,7 +957,7 @@ td
   &:nth-of-type(4)
     left: 2.1em
 
-/*--------- Gallows ------------
+/*--------- Gallows ------------*/
 
 .gallows
   font-size: 100%
@@ -968,14 +968,14 @@ td
     background: #2ecc71
     border-radius: 1em
 
-/*---------- Base ------------
+/*---------- Base ------------*/
 
 .base
   position: relative
   width: 8em
   height: 1em
 
-/*----------- Pole ------------
+/*----------- Pole ------------*/
 
 .pole
   position: relative
@@ -984,7 +984,7 @@ td
   top: 0.3em
   left: 3.5em
 
-/*--------- Top ----------------
+/*--------- Top ----------------*/
 
 .level-beam
   position: absolute
@@ -1009,7 +1009,8 @@ td
   top: 0.3em
   right: -5.2em
 
-/*------ Hang him ----------
+/*------ Hang him ----------*/
+
 @-webkit-keyframes hangHim
   0%
     -webkit-transform: translateY(0)
