@@ -10,11 +10,11 @@ GEM
     font-awesome-sass (4.7.0)
       sass (>= 3.2)
     libv8 (3.16.14.19)
-    rack (1.6.5)
+    rack (1.6.9)
     rack-coffee (1.0.3)
       coffee-script
       rack
-    rack-protection (1.5.3)
+    rack-protection (1.5.5)
       rack
     ref (2.0.0)
     sass (3.4.23)
@@ -58,4 +58,4 @@ DEPENDENCIES
   uglifier
 
 BUNDLED WITH
-   1.14.6
+   1.16.1
